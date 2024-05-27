@@ -1,0 +1,48 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+@import url('https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light only;
+}
+
+html, body {
+  min-height: 100%;
+}
+
+html.dark {
+  color-scheme: dark only;
+}
+
+body {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  /* font-size: 12pt; */
+  font-family: 'Pretendard';
+  font-size: 16px;
+  font-feature-settings: "zero", "ss06", "tnum", 'ss13';
+  font-weight: 300;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+}
+
+#app-header {
+  flex: none;
+}
+
+#app-content {
+  flex: 1 0 auto;
+}
+
+.emoji {
+  font-family: 'Noto Color Emoji', sans-serif;
+  font-style: normal;
+}
