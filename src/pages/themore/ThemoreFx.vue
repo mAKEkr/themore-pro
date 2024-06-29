@@ -2,15 +2,18 @@
   <section id="fxcalc-main">
     <NoticeComponent id="fxcalc-notice" class="mb-4" notice-id="uploader-process">
       <p>
-        <span class="icon">📢</span>더모아프로 개선작업 완료와 앞으로의 운영에 대해 공지합니다.
+        <span class="icon">📢</span>
+        <a href="https://themore-pro.notion.site/06a1a1a2edd3490b86ade97617ef1e69" target="_blank">
+          더모아프로 개선작업 완료와 앞으로의 운영에 대해 공지합니다.
+        </a>
       </p>
     </NoticeComponent>
 
     <header>
       <div class="header-buttons">
-        <Switch name="shinhanRemain" v-model="App.applySelectedRate">
+        <!-- <Switch name="shinhanRemain" v-model="App.applySelectedRate">
           해외이용환율선택 적용
-        </Switch>
+        </Switch> -->
         <RouterLink to="/themore-fx/config">설정</RouterLink>
       </div>
 
@@ -157,10 +160,14 @@
       updateData()
     })
 
+    // if (App.applySelectedRate === )
+
     watch(() => App.applySelectedRate, (value) => {
       if (value === true) {
         window.localStorage.removeItem('fxcalc-selectedRate')
+        Store.updateUserRateConfig(false)
       } else {
+        Store.updateUserRateConfig(window.localStorage.getItem('fxcalc-userRateConfig'))
         window.localStorage.setItem('fxcalc-selectedRate', value)
       }
     })

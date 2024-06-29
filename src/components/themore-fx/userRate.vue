@@ -1,16 +1,24 @@
 <template>
   <div id="fxcalc-select-rate">
     <h1>💱 사용자 지정 환율 선택</h1>
-    <form name="fxcalc_select_rate">
+    <form name="fxcalc_select_rate" @submit.prevent="applyUserRate">
       <ul>
         <li>
           <p>데이터 적용 환율 선택</p>
           <div>
-            <input type="radio" id="currency_USD" name="currency" value="USD" />
+            <input type="radio"
+              id="currency_USD"
+              name="currency"
+              v-model="data.currency"
+              value="USD" />
             <label for="currency_USD">
               USD
             </label>
-            <input type="radio" id="currency_ALL" name="currency" value="ALL" />
+            <input type="radio"
+              id="currency_ALL"
+              name="currency"
+              v-model="data.currency"
+              value="ALL" />
             <label for="currency_ALL">
               전체
             </label>
@@ -19,22 +27,38 @@
         <li>
           <p>환율 데이터 선택</p>
           <div>
-            <input type="radio" id="data_from_14d_high" name="data_from" value="14d_high" />
+            <input type="radio"
+              id="data_from_14d_high"
+              name="data_from"
+              v-model="data.data_from"
+              value="14d_high" />
             <label for="data_from_14d_high">
               14일 최고가
             </label>
   
-            <input type="radio" id="data_from_30d_high" name="data_from" value="30d_high" />
+            <input type="radio"
+              id="data_from_30d_high"
+              name="data_from"
+              v-mmodel="data.data_from"
+              value="30d_high" />
             <label for="data_from_30d_high">
               30일 최고가
             </label>
   
-            <input type="radio" id="data_from_14d_avg" name="data_from" value="14d_avg" />
+            <input type="radio"
+              id="data_from_14d_avg"
+              name="data_from"
+              v-mmodel="data.data_from"
+              value="14d_avg" />
             <label for="data_from_14d_avg">
               14일 평균
             </label>
   
-            <input type="radio" id="data_from_30d_avg" name="data_from" value="30d_avg" />
+            <input type="radio"
+              id="data_from_30d_avg"
+              name="data_from"
+              v-mmodel="data.data_from"
+              value="30d_avg" />
             <label for="data_from_30d_avg">
               30일 평균
             </label>
@@ -43,7 +67,13 @@
         <li>
           <p>추가 보정값 지정</p>
           <div>
-            <input type="number" name="fix_ratio" step="0.1" min="0" max="3" placeholder="퍼센트(숫자)" /> %
+            <input type="number"
+              v-model="data.fix_ratio"
+              name="fix_ratio"
+              step="0.1"
+              min="0"
+              max="3"
+              placeholder="퍼센트(숫자)" /> %
           </div>
         </li>
       </ul>
@@ -51,6 +81,31 @@
     </form>
   </div>
 </template>
+
+<script setup>
+  import { useUIStore } from '@/stores/ui'
+  import { useFxCalcStore } from '@/stores/themore-fx';
+
+  const Store = {
+    FxCalc: useFxCalcStore(),
+    UI: useUIStore()
+  }
+  const data = {
+    'currency': 'ALL',
+    'data_from': '14d_high',
+    'fix_ratio': 0
+  }
+
+  function applyUserRate () {
+    window.localStorage.setItem('fxcalc-userRateConfig', JSON.stringify(data))
+    Store.FxCalc.updateUserRateConfig(data)
+    Store.UI.Toast.addToast({
+      text: '사용자 지정 환율 설정이 완료되었습니다'
+    })
+
+    return false
+  }
+</script>
 
 <style lang="postcss">
   #fxcalc-select-rate {
@@ -80,8 +135,8 @@
       }
 
       input[type="radio"]:checked + label {
-        @apply bg-cyan-600 text-white;
-        @apply dark:bg-cyan-800 font-bold;
+        @apply bg-cyan-600 text-white font-bold;
+        @apply dark:bg-cyan-800;
       }
 
       label {

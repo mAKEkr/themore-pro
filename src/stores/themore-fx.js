@@ -10,6 +10,7 @@ export const useFxCalcStore = defineStore('themore-fx', () => {
     enable: false,
     data: {
       percentage: 1,
+      currencyTarget: 'USD',
       rateType: '',
       // rateType: '14d_high', '30d_high', '14d_avg', '30d_avg'
       fixRate: {
@@ -44,12 +45,19 @@ export const useFxCalcStore = defineStore('themore-fx', () => {
     return availableDates.value
   }
 
-  async function updateUserConfig(data) {
+  async function updateUserRateConfig(data) {
     if (data === false) {
       userRateConfig.enable = false
     } else {
       userRateConfig.enable = true
+
+      userRateConfig.data.percentage = data.fix_ratio
+      userRateConfig.data.rateType = data.data_from
+      userRateConfig.data.currencyTarget = data.currency
+
+      await getAdvancedFxData()
     }
+
     await updateTables()
   }
 
@@ -81,8 +89,8 @@ export const useFxCalcStore = defineStore('themore-fx', () => {
     await updateTables()
   }
 
-  async function getAdvancedFxData (datatype, currency) {
-    const [days, type] = datatype.split('_')
+  async function getAdvancedFxData () {
+    const [days, type] = userRateConfig.data.rateType.split('_')
     const list = await Supabase.from('ThemoreFx')
       .select('*')
       .order('date', { ascending: false })
@@ -170,5 +178,5 @@ export const useFxCalcStore = defineStore('themore-fx', () => {
     })
   }
 
-  return { getFxLog, data, getAvailableDates, availableDates, updateUserConfig }
+  return { getFxLog, data, getAvailableDates, availableDates, updateUserRateConfig }
 })

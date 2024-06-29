@@ -45,52 +45,6 @@ const router = createRouter({
         }
       ]
     },
-    // {
-    //   path: '/themore-point',
-    //   name: 'ThemorePoint',
-    //   meta: {
-    //     title: '더모아포인트'
-    //   },
-    //   component: () => import('../pages/themore/PointChecker.vue')
-    // },
-    {
-      path: '/fx-compare',
-      name: 'FxCompare',
-      meta: {
-        title: '환율비교'
-      },
-      component: () => import('../pages/FxCompare.vue')
-    },
-    // {
-    //   path: '/post',
-    //   name: 'Post',
-    //   meta: {
-    //     title: '게시글'
-    //   },
-    //   children: [
-    //     {
-    //       path: '',
-    //       redirect: () => {
-    //         return {
-    //           path: '/post/list/'
-    //         }
-    //       }
-    //     },
-    //     {
-    //       path: 'list',
-    //       name: 'PostList',
-    //       meta: {
-    //         title: '게시물 목록'
-    //       },
-    //       component: () => import('../pages/post/list.vue')
-    //     },
-    //     {
-    //       path: 'view/:id',
-    //       name: 'PostView',
-    //       component: () => import('../pages/post/view.vue')
-    //     }
-    //   ]
-    // }
   ]
 })
 

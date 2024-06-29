@@ -35,10 +35,6 @@
 
   const NumberFormat = new Intl.NumberFormat('ko-KR')
 
-  function getRefineTable (table) {
-    
-  }
-
   function getRevenuePercent (tableItem) {
     const target = String(tableItem[3])
     const revenue = Number(target.slice(-3, target.length)) * 2

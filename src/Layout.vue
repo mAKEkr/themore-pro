@@ -5,8 +5,6 @@
       <h1><img src="/assets/img/icons/128.png" />더모아프로<span class="max-sm-mobile:hidden"> - Themore.pro</span></h1>
       <nav>
         <RouterLink to="/themore-fx">더모아계산기</RouterLink>
-        <RouterLink to="/fx-compare">환율비교계산</RouterLink>
-        <!-- <RouterLink to="/post/list">게시글</RouterLink> -->
         <button>
           <IconSun v-if="darkMode === true" @click="themeChange" />
           <IconMoon v-if="darkMode === false" @click="themeChange" />
@@ -22,7 +20,7 @@
   <footer id="app-footer">
     <div class="width-container">
       <nav>
-        <a href="mailto:maker@themore.pro">오류, 궁금한점, 기능관련, 기타 문의(이메일)</a>
+        <a href="https://github.com/mAKEkr/themore-pro" target="_blank">Github Repository</a>
       </nav>
       <p>2024 Themore.pro</p>
     </div>
